@@ -1,0 +1,8 @@
+# mamba env create -f environment.yml --force
+name: selenium
+channels: [conda-forge]
+dependencies:
+  - pip
+  - pip:
+      - black
+      - selenium
