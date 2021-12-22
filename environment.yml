@@ -2,6 +2,7 @@
 name: selenium
 channels: [conda-forge]
 dependencies:
+  - pytest
   - pip
   - pip:
       - black
