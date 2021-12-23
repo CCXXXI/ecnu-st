@@ -40,7 +40,7 @@ def test_wrong_password(driver):
 
 
 @pytest.mark.no_login
-@pytest.mark.skip(reason="https://e.gitee.com/ecnu_sei_hysun/issues/list?issue=I4NWCP")
+@pytest.mark.xfail(reason="https://e.gitee.com/ecnu_sei_hysun/issues/list?issue=I4NWCP")
 def test_home2login(driver):
     """Redirect to /login if not logged in."""
     driver.get(BASE_URL + "#/home")
