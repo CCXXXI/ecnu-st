@@ -9,7 +9,7 @@ from .config import ADMIN_ID, ADMIN_PASSWORD, BASE_URL
 def driver():
     """The selenium driver."""
     driver = Edge()
-    driver.implicitly_wait(1)
+    driver.implicitly_wait(3)
     yield driver
     driver.quit()
 
