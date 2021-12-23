@@ -15,10 +15,10 @@ options.page_load_strategy = "eager"
 def driver():
     """The selenium driver."""
     # noinspection PyArgumentList
-    driver = Edge(options=options)
-    driver.implicitly_wait(3)
-    yield driver
-    driver.quit()
+    _driver = Edge(options=options)
+    _driver.implicitly_wait(3)
+    yield _driver
+    _driver.quit()
 
 
 @pytest.fixture(autouse=True, scope="module")
