@@ -11,7 +11,7 @@ options = Options()
 options.page_load_strategy = "eager"
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def driver():
     """The selenium driver."""
     # noinspection PyArgumentList
@@ -21,9 +21,9 @@ def driver():
     driver.quit()
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture(autouse=True, scope="module")
 def login(driver, request):
-    """Log in as admin."""
+    """The happy path of logging in as admin."""
     if "no_login" in request.keywords:
         return
 
@@ -41,3 +41,6 @@ def login(driver, request):
 
     driver.find_element(By.CLASS_NAME, "el-button").click()
     sleep(3)
+
+    # redirected to /home
+    assert driver.current_url.endswith("/home")

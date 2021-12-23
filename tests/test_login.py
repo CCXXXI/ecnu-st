@@ -50,9 +50,3 @@ def test_home2login(driver):
 
     # redirected to /login
     assert driver.current_url.endswith("/login")
-
-
-def test_login(driver):
-    """The happy path of logging in."""
-    # redirected to /home
-    assert driver.current_url.endswith("/home")
