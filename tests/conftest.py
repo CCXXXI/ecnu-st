@@ -41,6 +41,3 @@ def login(driver, request):
 
     driver.find_element(By.CLASS_NAME, "el-button").click()
     sleep(3)
-
-    # redirected to /home
-    assert driver.current_url.endswith("/home")
