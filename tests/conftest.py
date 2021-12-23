@@ -1,14 +1,21 @@
+from time import sleep
+
 import pytest
 from selenium.webdriver import Edge
 from selenium.webdriver.common.by import By
+from selenium.webdriver.edge.options import Options
 
 from .config import ADMIN_ID, ADMIN_PASSWORD, BASE_URL
+
+options = Options()
+options.page_load_strategy = "eager"
 
 
 @pytest.fixture
 def driver():
     """The selenium driver."""
-    driver = Edge()
+    # noinspection PyArgumentList
+    driver = Edge(options=options)
     driver.implicitly_wait(3)
     yield driver
     driver.quit()
@@ -33,3 +40,4 @@ def login(driver, request):
     ).send_keys(ADMIN_PASSWORD)
 
     driver.find_element(By.CLASS_NAME, "el-button").click()
+    sleep(3)

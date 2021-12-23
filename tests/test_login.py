@@ -1,5 +1,3 @@
-from time import sleep
-
 import pytest
 from selenium.webdriver.common.by import By
 
@@ -53,10 +51,5 @@ def test_home2login(driver):
 
 def test_login(driver):
     """The happy path of logging in."""
-    # there is a message
-    assert driver.find_element(By.CLASS_NAME, "el-message__content").text
-
-    sleep(1)
-
     # redirected to /home
     assert driver.current_url.endswith("/home")
