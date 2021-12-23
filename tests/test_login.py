@@ -1,3 +1,5 @@
+from time import sleep
+
 import pytest
 from selenium.webdriver.common.by import By
 
@@ -23,13 +25,13 @@ def test_wrong_password(driver):
         ".el-form-item:nth-child(2) .el-input__inner",
     ).send_keys(ADMIN_PASSWORD + "wrong")
 
-    # there is no alert
+    # there is no message
     assert not driver.find_elements(By.CLASS_NAME, "el-message__content")
 
     # log in
     driver.find_element(By.CLASS_NAME, "el-button").click()
 
-    # there is an alert
+    # there is a message
     assert driver.find_element(By.CLASS_NAME, "el-message__content").text
 
     # still at login page
@@ -42,8 +44,19 @@ def test_home2login(driver):
     """Redirect to /login if not logged in."""
     driver.get(BASE_URL + "#/home")
 
-    # there is an alert
+    # there is a message
     assert driver.find_element(By.CLASS_NAME, "el-message__content").text
 
     # redirected to /login
     assert driver.current_url.endswith("/login")
+
+
+def test_login(driver):
+    """The happy path of logging in."""
+    # there is a message
+    assert driver.find_element(By.CLASS_NAME, "el-message__content").text
+
+    sleep(1)
+
+    # redirected to /home
+    assert driver.current_url.endswith("/home")
