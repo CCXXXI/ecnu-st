@@ -1,3 +1,5 @@
+from time import sleep
+
 import pytest
 from selenium.webdriver.common.by import By
 
@@ -28,6 +30,7 @@ def test_wrong_password(driver):
 
     # log in
     driver.find_element(By.CLASS_NAME, "el-button").click()
+    sleep(1)
 
     # there is a message
     assert driver.find_element(By.CLASS_NAME, "el-message__content").text
