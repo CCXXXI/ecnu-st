@@ -2,7 +2,9 @@ import pytest
 from selenium.webdriver import Edge
 from selenium.webdriver.common.by import By
 
-from .config import ADMIN_ID, ADMIN_PASSWORD, BASE_URL
+from .config import ADMIN_ID
+from .config import ADMIN_PASSWORD
+from .config import BASE_URL
 
 
 @pytest.fixture
