@@ -1,22 +1,29 @@
+from time import sleep
+
 import pytest
 from selenium.webdriver import Edge
 from selenium.webdriver.common.by import By
+from selenium.webdriver.edge.options import Options
 
 from .config import ADMIN_ID, ADMIN_PASSWORD, BASE_URL
 
+options = Options()
+options.page_load_strategy = "eager"
 
-@pytest.fixture
+
+@pytest.fixture(scope="module")
 def driver():
     """The selenium driver."""
-    driver = Edge()
-    driver.implicitly_wait(1)
-    yield driver
-    driver.quit()
+    # noinspection PyArgumentList
+    _driver = Edge(options=options)
+    _driver.implicitly_wait(3)
+    yield _driver
+    _driver.quit()
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture(autouse=True, scope="module")
 def login(driver, request):
-    """Log in as admin."""
+    """The happy path of logging in as admin."""
     if "no_login" in request.keywords:
         return
 
@@ -33,3 +40,4 @@ def login(driver, request):
     ).send_keys(ADMIN_PASSWORD)
 
     driver.find_element(By.CLASS_NAME, "el-button").click()
+    sleep(3)
